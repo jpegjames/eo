@@ -24,8 +24,9 @@ class ApplicationController < ActionController::Base
 
   private
     def load_stop
-      if params[:id]
-        @stop = Stop.where(id: params[:id]).first
+      if params[:id] || params[:stop]
+        @stop = Stop.where(id: params[:id] || params[:stop]).first
+        @stop ||= Stop.where(stop_id: params[:id] || params[:stop]).first
       
       elsif session[:stop_id]
         @stop = Stop.find(session[:stop_id])
