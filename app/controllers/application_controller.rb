@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :load_stop
+  before_filter :load_stop, except: [:profile]
 
 
   def index
@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
 
   def schedule
     redirect_to planner_path if @stop.nil?
+  end
+
+  def profile
   end
 
 

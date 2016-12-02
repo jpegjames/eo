@@ -66,13 +66,17 @@
     });
 
 
-    // calculateAndDisplayRoute(directionsService, directionsDisplay);
     document.getElementById('origin').addEventListener('change', function() {
       calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
     document.getElementById('destination').addEventListener('change', function() {
       calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
+
+    <%# hack to calculate and display route on load %>
+    <% if params[:end] && @stop %>
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    <% end %>
 
 
 
@@ -176,22 +180,20 @@
 </div>
 </div>
 
-
 <div class="row">
   <div class="column">
     <div class="field-wrapper">
       <label>Start:</label>
-      <%= text_field_tag :origin, nil, placeholder: "#{'Current Bus Stop' if @stop}" %>
+      <%= text_field_tag :origin, params[:start], placeholder: "#{'Current Bus Stop' if @stop}" %>
       <%= hidden_field_tag :origin_lag, @stop.try(:lat) %>
       <%= hidden_field_tag :origin_long, @stop.try(:long) %>
     </div>
     <div class="field-wrapper">
       <label>End:</label>
-      <%= text_field_tag :destination %>
+      <%= text_field_tag :destination, params[:end] %>
     </div>
   </div>
 </div>
-
 <br>
 
 <div id="steps"></div>

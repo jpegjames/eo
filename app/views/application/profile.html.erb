@@ -1,0 +1,106 @@
+<style type="text/css">
+  .settings {
+    margin-top: 1em;
+  }
+  .box {
+    border: thin solid #8DC63F;
+    height: 75px;
+    padding-top: 25px;
+  }
+  .smalltext a {
+    color: #fff;
+  }
+</style>
+
+<div class="row">
+  <h2 class="small-12 columns">
+    <span class="sectionheader2">PROFILE</span>
+  </h2>
+</div>
+
+
+<div class="row">
+  <div class="small-1 small-offset-1 columns text-left margin columns">
+    <div class="icon">
+      <%= image_tag 'penwhite.svg', width: 12 %>
+    </div>
+  </div>
+  <div class="small-10 columns">
+    <span class="profiletext">LOCATION: NASHVILLE, TN</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-1 small-offset-1 columns text-left margin columns">
+    <div class="icon">
+      <%= image_tag 'penwhite.svg', width: 12 %>
+    </div>
+  </div>
+  <div class="small-10 columns">
+    <span class="profiletext">HOME: 123 ROAD, RD</span>
+  </div>
+</div>
+
+<section class="settings">
+  <div class="row">
+    <div class="small-5 small-push-1 columns text-center box">
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+      FAVORITES
+    </div>
+    <div class="small-5 small-pull-1 columns text-center box">
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+      RECENTS
+    </div>
+  </div>
+</section>
+
+
+<br>
+<div class="row">
+  <div class="small-12 columns">
+    <span class="profiletextsub">BELMONT UNIVERSITY</span>
+    <span class="smalltext">
+      <%= link_to 'START', planner_path(start: 'BELMONT UNIVERSITY') %> | 
+      <%= link_to 'END', planner_path(end: 'BELMONT UNIVERSITY') %>
+    </span>
+    <hr>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="small-12 columns">
+    <span class="profiletextsub">OPRY MILLS</span>
+    <span class="smalltext">
+      <%= link_to 'START', planner_path(start: 'OPRY MILLS') %> | 
+      <%= link_to 'END', planner_path(end: 'OPRY MILLS') %>
+    </span>
+    <hr>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="small-12 columns">
+    <span class="profiletextsub">HOME</span>
+    <span class="smalltext">
+      <%= link_to 'START', planner_path(start: '123 ROAD, RD') %> | 
+      <%= link_to 'END', planner_path(end: '123 ROAD, RD') %>
+    </span>
+    <hr>
+  </div>
+</div>
+
+
+<br>
+<div class="row">
+  <div class="small-12 columns">
+    <span class="profiletextsub">GREEN HILLS MALL</span>
+    <span class="smalltext">
+      <%= link_to 'START', planner_path(start: 'GREEN HILLS MALL') %> | 
+      <%= link_to 'END', planner_path(end: 'GREEN HILLS MALL') %>
+    </span>
+    <hr>
+  </div>
+</div>
+

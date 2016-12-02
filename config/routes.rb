@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/planner'  => 'application#planner',   as: 'planner'
   get '/schedule' => 'application#schedule',  as: 'schedule'
+  get '/profile'  => 'application#profile',   as: 'profile'
   root 'application#index'
 
 
