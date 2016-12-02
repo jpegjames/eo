@@ -1,0 +1,216 @@
+<%
+  # use Stop or Nashville's coordinates
+  default_lat = @stop.try(:lat) || 36.1627
+  default_long = @stop.try(:long) || -86.7816
+%>
+
+<style type="text/css">
+
+  #map {
+    width: 100%;
+    height: 200px;
+  }
+
+  input, .field-wrapper label {
+    /* need a better typeface */
+    font-family: arial, sans-serif !important;
+  }
+
+  .field-wrapper {
+    position: relative;
+  }
+  .field-wrapper label {
+    position: absolute;
+    line-height: 38px;
+    left: 8px;
+    text-transform: uppercase;
+  }
+  .field-wrapper input {
+    padding-left: 70px;
+    margin-bottom: 0;
+  }
+</style>
+
+
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/directions/js?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyDxT6IRVIxMyrC25V1c_B9-xdLGtTxuSZw"></script> -->
+
+<!-- https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyDxT6IRVIxMyrC25V1c_B9-xdLGtTxuSZw
+ -->
+
+<script type="text/javascript">
+  // google.maps.event.addDomListener(window, 'load', init);
+  $(document).ready(function() { 
+    init();
+  });
+  
+
+  function init() {
+    var mapOptions = {
+      zoom: 14,
+      center: new google.maps.LatLng(<%= default_lat %>, <%= default_long %>),
+      styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#8dc63f"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"saturation":"56"},{"lightness":"1"},{"gamma":"1.09"}]},{"featureType":"transit.station.bus","elementType":"labels.icon","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#71df51"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#161741"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"},{"visibility":"on"},{"weight":"1.77"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"color":"#afafaf"},{"visibility":"on"}]}]
+    };
+    var mapElement = document.getElementById('map');
+
+    var map = new google.maps.Map(mapElement, mapOptions);
+
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+      map: map
+    });
+
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(<%= default_lat %>, <%= default_long %>),
+      map: map,
+      title: '<%= @stop.try(:name) || 'Nashville' %>'
+    });
+
+
+    // calculateAndDisplayRoute(directionsService, directionsDisplay);
+    document.getElementById('origin').addEventListener('change', function() {
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    });
+    document.getElementById('destination').addEventListener('change', function() {
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    });
+
+
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      var currentOrigin = {
+        lat: Number(document.getElementById('origin_lag').value), 
+        lng: Number(document.getElementById('origin_long').value)
+      }
+      var typedOrigin = add_nashville_tn(document.getElementById('origin').value);
+      var typedDestination = add_nashville_tn(document.getElementById('destination').value);
+   
+
+      // Set travel points
+      // var origin = {lat: 36.1330511, lng: -86.7970213};
+      // var destination = {lat: 36.202834, lng: -86.6935243};
+      // var origin = 'Belmont University, Nashville TN';
+      // var destination = 'Opry Mills Mall';
+
+      // Set destination, origin and travel mode.
+      var request = {
+        origin: typedOrigin || currentOrigin,
+        destination: typedDestination,
+        travelMode: 'TRANSIT'
+      };
+
+      // Pass the directions request to the directions service.
+      var directionsService = new google.maps.DirectionsService();
+      directionsService.route(request, function(response, status) {
+        if (status == 'OK') {
+          // Display the route on the map.
+          directionsDisplay.setDirections(response);
+          // alert(response.routes[0].legs[0].steps[0].transit.num_stops);
+          console.log(response.routes[0].legs[0].steps);
+          display_steps(response.routes[0].legs[0].steps);
+        } else if (status == 'ZERO_RESULTS') {
+          alert('No route found');
+        }
+      });
+
+
+    }
+
+    function display_steps(steps) {
+      var stepsData = []
+
+      // https://coderwall.com/p/kvzbpa/don-t-use-array-foreach-use-for-instead
+      for (var i = 0, len = steps.length; i < len; i++) {
+        console.log(steps[i].instructions);
+        stepsData.push({
+          travelMode: steps[i].travel_mode,
+          instructions: steps[i].instructions,
+          details: format_details(steps[i]),
+          transitIcon: setTransitIcon(steps[i])
+        })
+      }
+
+
+      $('#steps').loadTemplate($('#template'), stepsData);
+    }
+
+    function format_details(step) {
+      if (step.travel_mode == 'TRANSIT') {
+        return 'Bus ' + step.transit.line.short_name + ' | ' + step.transit.departure_time.text;
+      } else if (step.travel_mode == 'WALKING')  {
+        return step.distance.text + ' | ' + step.duration.text;
+      }
+    }
+
+    function setTransitIcon(step) {
+      if (step.travel_mode == 'TRANSIT') {
+        return '<%= image_tag "bus.svg", width: "30" %>';
+      } else if (step.travel_mode == 'WALKING')  {
+        return '<%= image_tag "person.svg", width: "30" %>';
+      }
+    }
+
+    function add_nashville_tn(string) {
+      if (string.length > 0) {
+        if (string.toLowerCase().includes('nashville') == false) {
+          string += ' Nashville';
+        }
+        if (string.toLowerCase().includes('tn') == false && string.toLowerCase().includes('tennessee') == false) {
+          string += ' TN';
+        }
+      }
+      return string;
+    }
+  }
+</script>
+
+
+<div class="row">
+<h2 class="small-12 columns">
+<span class="sectionheader">YOUR TRIP</span>
+</h2>
+</div>
+
+<div class="row">
+<div class="small-12 columns"><br>
+<div id="map"></div>
+</div>
+</div>
+
+
+<div class="row">
+  <div class="column">
+    <div class="field-wrapper">
+      <label>Start:</label>
+      <%= text_field_tag :origin, nil, placeholder: "#{'Current Bus Stop' if @stop}" %>
+      <%= hidden_field_tag :origin_lag, @stop.try(:lat) %>
+      <%= hidden_field_tag :origin_long, @stop.try(:long) %>
+    </div>
+    <div class="field-wrapper">
+      <label>End:</label>
+      <%= text_field_tag :destination %>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div id="steps"></div>
+
+<script id="template" type="text/html">
+  <div class="row">
+    <div class="small-2 columns">
+      <div class="icon" data-content="transitIcon"></div> 
+    </div>
+    <div class="small-8 columns">
+      <center>
+        <div class="mlocation" data-content="instructions"></div>
+        <div class="mstop" data-content="details"></div>
+      </center>
+    </div>
+    <div class="small-2 columns">
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+    </div>
+  </div>
+  <hr>
+</script>
+

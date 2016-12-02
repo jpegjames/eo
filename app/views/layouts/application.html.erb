@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EO</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxT6IRVIxMyrC25V1c_B9-xdLGtTxuSZw"></script>
+  <script src="https://use.fontawesome.com/2e3a9f5f44.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header class="headerrow">
+  <div class="small-4 columns">
+    <%= link_to '#' do %>
+      <div class="icon">
+        <%= image_tag('profile.svg', width: 40) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="small-4 columns text-center">
+    <%= link_to '/' do %> 
+      <%= image_tag('eologo.svg', width: 80) %>
+    <% end %>
+  </div>
+
+  <div class="small-4 columns">
+    <div class="icon">
+      <%= image_tag('sun.svg', width: 40) %>
+    </div>
+    <div class="weather">Rain in 20 minutes</div>
+  </div>
+</header>
+
+
+<%= yield %>
+
+<footer class="row" style="margin-top: 2em; margin-bottom: 1em;">
+  <div class="small-12 columns">
+    <div class="slogan">NASHVILLE TRANSIT MADE SIMPLE</div>
+  </div>
+</footer>
+
+</body>
+</html>

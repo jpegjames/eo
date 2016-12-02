@@ -1,0 +1,318 @@
+@charset "UTF-8";
+@import url("/assets/webfonts/Raleway_Light/stylesheet.css");
+@import url("/assets/webfonts/Raleway_Medium/stylesheet.css");
+@import url("/assets/webfonts/Raleway_Regular/stylesheet.css");
+@import url("/assets/webfonts/Raleway_SemiBold/stylesheet.css");
+@import url("/assets/webfonts/Raleway_Bold/stylesheet.css");
+
+#countdown {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flip-clock-label {
+    display: none;
+}
+
+    
+body {
+	color: #F1f2f2;
+	background-color: #12143C;
+	font-family: 'Raleway', sans-serif;
+}
+.row .small-12.columns .stopbus {
+	display: block;
+	text-align: center;
+	color: #8DC63F;
+	font-family: "Raleway Regular";
+	font-size: xx-large;
+	letter-spacing: 2pt;
+	margin-top: -5px;
+}
+.headerrow {
+	padding-top: 14px;
+}
+.row .small-12.columns .stopname {
+	display: block;
+	text-align: center;
+	letter-spacing: 1.5pt;
+	font-size: large;
+	font-weight: normal;
+	margin-bottom: 5px;
+	color: #F1F2F2;
+}
+.small-12.columns center .fa.fa-plus-circle.fa-2x {
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+.small-12.columns .location.name {
+	letter-spacing: 1.5PT;
+	font-style: italic;
+	font-family: "Raleway Regular";
+	color: #F1F2F2;
+}
+.row .small-12.columns .slogan {
+	color: #8DC63F;
+	margin-left: auto;
+	font-family: "Raleway SemiBold";
+	letter-spacing: 1.5PT;
+	margin-right: auto;
+	text-align: center;
+	background-image: url(url), -webkit-linear-gradient(270deg,rgba(24,23,36,0.00) 0%,rgba(24,23,36,1.00) 100%);
+	background-image: url(url), -moz-linear-gradient(270deg,rgba(24,23,36,0.00) 0%,rgba(24,23,36,1.00) 100%);
+	background-image: url(url), -o-linear-gradient(270deg,rgba(24,23,36,0.00) 0%,rgba(24,23,36,1.00) 100%);
+	background-image: url(url), linear-gradient(180deg,rgba(24,23,36,0.00) 0%,rgba(24,23,36,1.00) 100%);
+}
+.small-12.columns .location.stop {
+	font-family: "Raleway Regular";
+	letter-spacing: 1.5PT;
+	color: #F1F2F2;
+}
+.row .small-12.columns hr {
+	border-style: solid none none;
+	border-top-width: 1px;
+	width: 180PX;
+	margin-bottom: 20px;
+	color: #F1F2F2;
+	margin-top: 20px;
+	display: block;
+}
+.row .small-12.columns .sectionheader {
+	font-family: "Raleway Medium";
+	letter-spacing: 1pt;
+	font-size: medium;
+	color: #F1F2F2;
+	display: block;
+}
+.nextbus   {
+	display: block;
+	font-family: "Raleway Medium";
+	letter-spacing: 1pt;
+	color: #8DC63F;
+	margin-top: -30PX;
+}
+.small-12.columns .location.heading {
+	font-family: "Raleway Medium";
+	letter-spacing: 1.5pt;
+	font-size: x-large;
+	color: #F1F2F2;
+}
+h2 {
+	background-image: -webkit-linear-gradient(270deg,rgba(24,23,36,1.00) 0%,rgba(24,23,36,0.00) 100%);
+	background-image: -moz-linear-gradient(270deg,rgba(24,23,36,1.00) 0%,rgba(24,23,36,0.00) 100%);
+	background-image: -o-linear-gradient(270deg,rgba(24,23,36,1.00) 0%,rgba(24,23,36,0.00) 100%);
+	background-image: linear-gradient(180deg,rgba(24,23,36,1.00) 0%,rgba(24,23,36,0.00) 100%);
+	font-weight: normal;
+	padding-bottom: 12px;
+	padding-top: 5px;
+}
+.row .small-4.columns .fa.fa-sun-o.fa-2x {
+}
+.small-4.columns .weather  {
+	font-size: small;
+	text-align: center;
+	color: #F1F2F2;
+}
+.location {
+	display: block;
+	text-align: center;
+}
+.small-12.columns center .stoplocation {
+	font-family: "Raleway Medium";
+	letter-spacing: 1pt;
+	color: #8DC63F;
+	margin-top: -5px;
+	display: block;
+}
+.row .small-2.columns .time {
+	font-family: "Raleway Medium";
+	letter-spacing: 1pt;
+	font-size: medium;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.row .small-2.columns .pm {
+	font-family: "Raleway Regular";
+	font-variant: small-caps;
+	text-align: center;
+	letter-spacing: 0.5pt;
+	font-size: small;
+	margin-left: auto;
+	margin-right: auto;
+	left: auto;
+	right: auto;
+	display: block;
+	margin-top: -1px;
+}
+.row .small-6.columns .mlocation {
+	font-size: large;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.row .small-6.columns .mstop {
+	font-size: small;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+}
+.headerrow hr {
+	width: 60%;
+	display: block;
+}
+.row .small-2.columns .fa.fa-map-marker {
+	font-size: xx-large;
+}
+.row .small-8.columns .fa.fa-times-circle-o {
+	text-align: center;
+	font-size: xx-large;
+	margin-right: auto;
+	margin-left: auto;
+}
+.small-12.columns center .plannergeton {
+	display: block;
+	font-family: "Raleway Medium";
+	color: #8DC63F;
+	margin-top: -20px;
+}
+.row .startingpoint  {
+	font-family: "Raleway SemiBold";
+	margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(239,240,233,1.00);
+	color: #12143C;
+	font-size: large;
+	padding-right: 10px;
+	padding-left: 20px;
+	border: 0.5PX solid #12143C;
+	display: block;
+	padding-top: 3.5px;
+	padding-bottom: 3.5px;
+}
+.row .small-12.columns .sectionheader2 {
+	font-family: "Raleway Medium";
+	color: #8DC63F;
+	font-size: medium;
+	letter-spacing: 1pt;
+}
+.profiletext   {
+	color: rgba(225,225,223,1.00);
+	font-family: "Raleway SemiBold";
+	font-size: large;
+	text-align: left;
+	display: block;
+	letter-spacing: 1pt;
+}
+.small-12.columns .smalltext  {
+	font-size: small;
+	word-spacing: 2px;
+	letter-spacing: 1px;
+	text-align: center;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+.headerrow .row .pen {
+	color: #12143C;
+	font-size: medium;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border: 0.5px solid #12143C;
+	padding-left: 10px;
+	background-color: rgba(239,240,233,1.00);
+}
+.row .small-6.columns .favorites {
+	font-family: "Raleway Bold";
+	font-size: x-large;
+	border: 1px solid #8DC63F;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	display: block;
+	text-align: center;
+}
+.icon   {
+	width: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	height: 30px;
+}
+.row .small-12.columns .iconfull {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.headerrow .row {
+}
+.row .small-8.columns .iconmedium {
+	width: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.small-12.columns .startingpoint .icon {
+	text-align: right;
+	float: right;
+	padding-right: 10px;
+}
+.row .small-2.columns .fa.fa-heart,
+.row .small-2.columns .fa.fa-heart-o {
+	font-size: large;
+	margin-left: auto;
+	margin-right: auto;
+	width: 30px;
+	display: block;
+	padding-right: 60px;
+	padding-top: 15px;
+}
+#steps .row .small-2.columns .fa {
+	padding-right: 0;
+}
+.row .small-12.columns .profiletextsub {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	font-family: "Raleway Bold";
+	letter-spacing: 1pt;
+	text-align: center;
+}
+.checkbox {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border: 1px solid #8DC63F;
+	margin-right: 15px;
+	margin-left: 30px;
+}
+
+.smallcheckbox {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #8DC63F;
+	display: inline-block;
+	margin-bottom: 0.5px;
+	margin-right: -40px;
+}
+.checkbox.checked, .smallcheckbox.checked {
+	background-color: #8DC63F;
+}
+.row .small-10.columns .smallprofiletext {
+	display: block;
+	color: rgba(225,225,223,1.00);
+	font-family: "Raleway SemiBold";
+	font-size: medium;
+	text-align: left;
+	letter-spacing: 1pt;
+}
+.checked {
+}

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  block_id: MyString
+  bikes_allowed: false
+  route_id: 
+  wheelchair: false
+  direction_id: 1
+  headsign: MyText
+
+two:
+  block_id: MyString
+  bikes_allowed: false
+  route_id: 
+  wheelchair: false
+  direction_id: 1
+  headsign: MyText

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lat: 
+  lat: 
+  long: 
+  long: 
+  wheelchair: false
+  stop_id: MyString
+  stop_code: MyString
+  description: MyString
+  name: MyString
+
+two:
+  lat: 
+  lat: 
+  long: 
+  long: 
+  wheelchair: false
+  stop_id: MyString
+  stop_code: MyString
+  description: MyString
+  name: MyString

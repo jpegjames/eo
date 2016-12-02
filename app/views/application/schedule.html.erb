@@ -1,0 +1,110 @@
+<%
+  # use Stop or Nashville's coordinates
+  default_lat = @stop.try(:lat) || 36.1627
+  default_long = @stop.try(:long) || -86.7816
+%>
+
+<style type="text/css">
+
+  #schedulemap {
+    width: 100%;
+    height: 200px;
+  }
+
+  input, .field-wrapper label {
+    /* need a better typeface */
+    font-family: arial, sans-serif !important;
+  }
+
+  .field-wrapper {
+    position: relative;
+  }
+  .field-wrapper label {
+    position: absolute;
+    line-height: 38px;
+    left: 8px;
+    text-transform: uppercase;
+  }
+  .field-wrapper input {
+    padding-left: 70px;
+    margin-bottom: 0;
+  }
+</style>
+
+
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/directions/js?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyDxT6IRVIxMyrC25V1c_B9-xdLGtTxuSZw"></script> -->
+
+<!-- https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyDxT6IRVIxMyrC25V1c_B9-xdLGtTxuSZw
+ -->
+
+<script type="text/javascript">
+  // google.maps.event.addDomListener(window, 'load', init);
+  $(document).ready(function() { 
+    init();
+  });
+  
+
+  function init() {
+    var mapOptions = {
+      zoom: 14,
+      center: new google.maps.LatLng(<%= default_lat %>, <%= default_long %>),
+      styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#8dc63f"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"saturation":"56"},{"lightness":"1"},{"gamma":"1.09"}]},{"featureType":"transit.station.bus","elementType":"labels.icon","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#71df51"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#161741"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"},{"visibility":"on"},{"weight":"1.77"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"color":"#afafaf"},{"visibility":"on"}]}]
+    };
+    var mapElement = document.getElementById('schedulemap');
+
+    var map = new google.maps.Map(mapElement, mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(<%= default_lat %>, <%= default_long %>),
+      map: map,
+      title: '<%= @stop.try(:name) || 'Nashville' %>'
+    });
+  }
+</script>
+
+
+<div class="row">
+<h2 class="small-12 columns">
+<span class="sectionheader">NEXT STOP</span>
+</h2>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <span class="stopbus">BUS #<%= next_stop_time(@stop).route %></span>
+    <span class="stopname">
+      <h3>
+        GOING TO<br>
+        <em><%= next_stop_time(@stop).trip.headsign %></em>
+      </h3>
+    </span>
+  </div>
+</div>
+
+<div class="row">
+<div class="small-12 columns"><br>
+<div id="schedulemap"></div>
+</div>
+</div>
+
+
+<br>
+
+<% next_stop_time(@stop).trip.stop_times.each do |stop_time| %>
+  <div class="row">
+    <div class="small-2 columns">
+      <span class="time"><%= stop_time.arrival_time.strftime("%l:%M") %></span>
+      <span class="pm"><%= stop_time.arrival_time.strftime("%p") %></span>
+    </div>
+    <div class="small-8 columns">
+      <center>
+        <div class="mlocation"><%= stop_time.stop.name %></div>
+        <!-- <div class="mstop">Stop #57</div> -->
+      </center>
+    </div>
+    <div class="small-2 columns">
+      <%= image_tag('marker.svg', width: 21) %>
+    </div>
+  </div>
+  <hr>
+<% end %>

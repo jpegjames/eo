@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="small-12 columns"><br>
+    <h1>
+      <span class="location heading">YOU ARE AT</span>
+      <span class="location name"><%= @stop.name %></span>
+      <!-- <span class="location stop">STOP # 57</span> -->
+      <hr>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns"><br>
+    <center>
+      <%#= next_stop_time(@stop).arrival_time %>
+      <span class="nextbus">NEXT BUS ARRIVES <%= true ? 'IN' : 'AT' %>:</span>
+    </center>
+    <div id="countdown"></div>
+  </div>
+</div>
+
+
+<div class="row">
+  <h2 class="small-12 columns">
+    <span class="sectionheader">NEXT STOP</span>
+  </h2>
+</div>
+
+
+<%= link_to schedule_path do %>
+  <div class="row">
+    <div class="small-12 columns">
+      <span class="stopbus">BUS #<%= next_stop_time(@stop).route %></span>
+      <span class="stopname">
+        <h3>
+          GOING TO<br>
+          <em><%= next_stop_time(@stop).trip.headsign %></em>
+        </h3>
+      </span>
+      <div class="iconfull">
+        <%= image_tag 'plus.svg', width: 30 %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <h2 class="small-12 columns">
+    <span class="sectionheader">YOUR TRIP</span>
+  </h2>
+</div>
+
+<%= link_to planner_path(id: params[:id]) do %>
+  <div class="row">
+    <div class="small-12 columns">
+      <span class="stopname">
+        <h3>GET ON</h3>
+      </span>
+      <span class="stopbus">BUS #<%= next_stop_time(@stop).route %></span>
+      <div class="iconfull">
+        <%= image_tag 'plus.svg', width: 30 %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+<script type="text/javascript">
+    var clock = $('#countdown').FlipClock({
+        // ... your options here
+        clockFace: 'MinuteCounter',
+        countdown: true
+    });
+
+    clock.setTime(<%= next_bus_countdown(@stop) %>);
+    clock.start();
+</script>
+
