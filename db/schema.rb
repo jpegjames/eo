@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201065202) do
+ActiveRecord::Schema.define(version: 20161129084320) do
 
   create_table "routes", force: :cascade do |t|
     t.string   "short_name"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20161201065202) do
   create_table "stop_times", force: :cascade do |t|
     t.integer  "trip_id"
     t.string   "stop_id"
-    t.time     "arrival_time"
-    t.time     "departure_time"
+    t.datetime "arrival_time"
+    t.datetime "departure_time"
     t.integer  "stop_sequence"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
