@@ -6,11 +6,13 @@ module StopHelper
 
     if next_bus_time > now
       # today
-      return next_bus_time - now
+      time = next_bus_time - now
     else
       # tomorrow
-      return next_bus_time.change(day: now.day + 1) - now
+      time = next_bus_time.change(day: now.day + 1) - now
     end
+
+    return time > 2000 ? 1500 : time # This prevents the mockup from having numbers multiple hours long when not using full dataset on Heroku
   end
 
   def next_stop_time(stop)
@@ -33,7 +35,7 @@ module StopHelper
     now = Time.now
 
     # TEST DATA
-    now = Time.parse('9:00am UTC')
+    # now = Time.parse('9:00am UTC')
 
     return now
   end

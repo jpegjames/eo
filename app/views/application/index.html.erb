@@ -73,7 +73,6 @@
         countdown: true
     });
 
-    clock.setTime(<%= next_bus_countdown(@stop) %>);
+    clock.setTime(<%= 2000 || next_bus_countdown(@stop) %>);
     clock.start();
 </script>
-
